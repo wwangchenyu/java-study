@@ -11,8 +11,8 @@ public class App {
 
         Ticket ticket1 = (Ticket) applicationContext.getBean("ticket");
         Ticket ticket2 = (Ticket) applicationContext.getBean("ticket");
-        System.out.println(ticket1.checkTicket());
-        System.out.println(ticket2.checkTicket());
+        System.out.println(ticket1.printInfo());
+        System.out.println(ticket2.printInfo());
         System.out.println(ticket1 == ticket2);
 
         Cinema cinema = (Cinema) applicationContext.getBean("cinema");

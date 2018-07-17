@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd"
         default-init-method="init" default-destroy-method="destory">
 
-    <bean id="ticket" class="com.asiainfo.entity.Ticket" scope="prototype"> <!--singleton-->
+    <bean id="ticket" class="com.asiainfo.entity.Ticket" scope="prototype"
+        p:movieName="当幸福来敲门"
+        p:duration="2H"
+        p:startTime="2018-07-17 18:00"> <!--singleton-->
     </bean>
 
     <!-- 电影院大屏幕 -->
@@ -20,7 +24,19 @@
         <property name="address" value="北京市海淀区海淀黄庄地铁站"></property>   <!-- 必须提供相应属性的setter方法 -->
         <property name="name" value="海淀大剧院"></property>
         <property name="screen" ref="screen"></property>
+        <property name="doors">
+            <list>
+                <ref bean="door1"/>
+                <ref bean="door1"/>
+            </list>
+
+        </property>
     </bean>
 
+    <bean id="door1" class="com.asiainfo.entity.Door" scope="prototype">
+        <constructor-arg value="3"></constructor-arg>
+        <constructor-arg value="2"></constructor-arg>
+        <constructor-arg value="铁门"></constructor-arg>
+    </bean>
 
 </beans>
