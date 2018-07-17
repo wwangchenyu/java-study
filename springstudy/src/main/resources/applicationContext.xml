@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd"
+        default-init-method="init" default-destroy-method="destory">
+
+    <bean id="ticket" class="com.asiainfo.entity.Ticket" scope="prototype"> <!--singleton-->
+    </bean>
+
+    <!-- 电影院大屏幕 -->
+    <bean id="screen" class="com.asiainfo.entity.Screen">
+        <constructor-arg value="60"></constructor-arg>
+        <constructor-arg value="190"></constructor-arg>
+    </bean>
+
+    <bean id="cinema" class="com.asiainfo.entity.Cinema" factory-method="getInstance">
+        <!--<constructor-arg value="123"></constructor-arg>-->
+        <!--<constructor-arg value="12321"></constructor-arg>-->
+        <property name="address" value="北京市海淀区海淀黄庄地铁站"></property>   <!-- 必须提供相应属性的setter方法 -->
+        <property name="name" value="海淀大剧院"></property>
+        <property name="screen" ref="screen"></property>
+    </bean>
+
+
+</beans>
