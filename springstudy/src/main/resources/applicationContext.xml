@@ -2,9 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd"
-        default-init-method="init" default-destroy-method="destory">
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+        default-init-method="init" default-destroy-method="destory">    <!-- default-autowire="byName" -->
+
+    <context:annotation-config></context:annotation-config>   <!--自动注入，能够将xml中定义的bean自动注入到注解标注的方法，构造，或是属性 -->
+
+    <!--<context:component-scan base-package="">-->
+        <!--<context:include-filter type="" expression=""-->
+    <!--</context:component-scan>-->
 
     <bean id="ticket" class="com.asiainfo.entity.Ticket" scope="prototype"
         p:movieName="当幸福来敲门"
@@ -23,17 +32,33 @@
         <!--<constructor-arg value="12321"></constructor-arg>-->
         <property name="address" value="北京市海淀区海淀黄庄地铁站"></property>   <!-- 必须提供相应属性的setter方法 -->
         <property name="name" value="海淀大剧院"></property>
-        <property name="screen" ref="screen"></property>
+        <!-- <property name="screen" value="#{screen}"></property>  ref="screen"与spEL表达式：#{screen}作用相同 -->
         <property name="doors">
             <list>
-                <ref bean="door1"/>
-                <ref bean="door1"/>
+                <!--<ref bean="door1"></ref>-->
+                <!--<ref bean="door2"></ref>-->
+                <bean class="com.asiainfo.entity.Door">
+                    <constructor-arg value="5"></constructor-arg>
+                    <constructor-arg value="3"></constructor-arg>
+                    <constructor-arg value="木门"></constructor-arg>
+                </bean>
+                <bean class="com.asiainfo.entity.Door">
+                    <constructor-arg value="6"></constructor-arg>
+                    <constructor-arg value="3"></constructor-arg>
+                    <constructor-arg value="塑料门"></constructor-arg>
+                </bean>
             </list>
 
         </property>
     </bean>
 
-    <bean id="door1" class="com.asiainfo.entity.Door" scope="prototype">
+    <bean id="door1" class="com.asiainfo.entity.Door">
+        <constructor-arg value="3"></constructor-arg>
+        <constructor-arg value="2"></constructor-arg>
+        <constructor-arg value="铁门"></constructor-arg>
+    </bean>
+
+    <bean id="door2" class="com.asiainfo.entity.Door">
         <constructor-arg value="3"></constructor-arg>
         <constructor-arg value="2"></constructor-arg>
         <constructor-arg value="铁门"></constructor-arg>

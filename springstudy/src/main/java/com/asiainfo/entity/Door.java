@@ -12,6 +12,6 @@ public class Door {
     }
 
     public String printInfo(){
-        return "height:" + height + ",width:" + width + ",material" + material;
+        return "height:" + height + ",width:" + width + ",material:" + material;
     }
 }

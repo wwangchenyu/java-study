@@ -1,5 +1,7 @@
 package com.asiainfo.entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 /**
@@ -9,6 +11,7 @@ import java.util.List;
 public class Cinema {
     private String name;
     private String address;
+//    @Autowired(required = false)    //如果配置required=true（默认值），若找不到相应bean，则会抛出异常NoSuchBeanDefinitionException
     private Screen screen;
     private List<Door> doors;
     private Cinema(){}
@@ -45,9 +48,12 @@ public class Cinema {
         System.out.print("name=" + this.name + ",address=" + this.address);
         System.out.print(",Screen Size:" + this.screen.printSize());
         System.out.println(",door count:" + this.doors.size());
-        System.out.println(this.doors.get(0) == this.doors.get(1));
+        for(int i= 0,size = doors.size(); i < size; i++){
+            System.out.println(doors.get(i).printInfo());
+        }
     }
 
+    @Autowired
     public void setScreen(Screen screen) {
         this.screen = screen;
     }
