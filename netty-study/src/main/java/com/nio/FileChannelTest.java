@@ -1,4 +1,4 @@
-package com.netty.nio;
+package com.nio;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
